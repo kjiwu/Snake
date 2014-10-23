@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="40" height="24" tilewidth="32" tileheight="32">
  <tileset firstgid="1" name="GoP_1" tilewidth="32" tileheight="32">
-  <image source="../../../../../迅雷下载/DFCCC2959225E15148873C64920B4945/GoP_1.png" width="512" height="512"/>
+  <image source="GoP_1.png" width="512" height="512"/>
  </tileset>
  <layer name="Background" width="40" height="24">
   <data encoding="base64" compression="zlib">
