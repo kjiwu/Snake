@@ -8,7 +8,7 @@ bool GameScene::init()
 	{
 		CC_BREAK_IF(!CCLayer::init());
 
-		m_map = CCTMXTiledMap::create("map/map.tmx");
+		m_map = CCTMXTiledMap::create("map.tmx");
 		addChild(m_map);
 
 		bRet = true;
