@@ -1,4 +1,6 @@
 #include "TouchLayer.h"
+#include "GameScene.h"
+#include "PlayerLayer.h"
 
 #define MOVE_MIN_DISTANCE 25;
 
@@ -41,29 +43,51 @@ void TouchLayer::ccTouchMoved(CCTouch *pTouch, CCEvent *pEvent)
 
 void TouchLayer::ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent)
 {
-	CCPoint subPos = ccpSub(m_currentPos, m_prePos);
-	if (fabs(subPos.x) > fabs(subPos.y))
+	do
 	{
-		if (subPos.x >= m_moveDistance)
-		{
-			CCLOG("Right");
-		}
+		GameScene* gameScene = dynamic_cast<GameScene*>(getParent());
+		CC_BREAK_IF(!gameScene);
 
-		if (subPos.x <= -m_moveDistance)
-		{
-			CCLOG("Left");
-		}
-	}
-	else
-	{
-		if (subPos.y >= m_moveDistance)
-		{
-			CCLOG("Up");
-		}
+		PlayerLayer* playerLayer = dynamic_cast<PlayerLayer*>(gameScene->getChildByTag(PLAYERLAYER_TAG));
+		CC_BREAK_IF(!playerLayer);
 
-		if (subPos.y <= -m_moveDistance)
+		Direction direction = playerLayer->getDirection();
+
+		CCPoint subPos = ccpSub(m_currentPos, m_prePos);
+		if (fabs(subPos.x) > fabs(subPos.y))
 		{
-			CCLOG("Down");
+			if (subPos.x >= m_moveDistance)
+			{
+				if (direction == dLeft || direction == dRight)
+					return;
+				playerLayer->setDirection(dLeft);
+			}
+
+			if (subPos.x <= -m_moveDistance)
+			{
+				if (direction == dLeft || direction == dRight)
+					return;
+
+				playerLayer->setDirection(dRight);
+			}
 		}
-	}
+		else
+		{
+			if (subPos.y >= m_moveDistance)
+			{
+				if (direction == dUp || direction == dDown)
+					return;
+
+				playerLayer->setDirection(dUp);
+			}
+
+			if (subPos.y <= -m_moveDistance)
+			{
+				if (direction == dUp || direction == dDown)
+					return;
+
+				playerLayer->setDirection(dDown);
+			}
+		}
+	} while (0);
 }

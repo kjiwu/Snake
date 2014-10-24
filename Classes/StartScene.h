@@ -5,6 +5,8 @@
 
 USING_NS_CC;
 
+#define STARTSCENE_TAG 1
+
 class StartScene : public CCLayer
 {
 public:

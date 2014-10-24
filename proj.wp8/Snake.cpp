@@ -6,6 +6,8 @@
 #include <ppltasks.h>
 #include "Snake.h"
 #include "CCApplication.h"
+#include "StartScene.h"
+#include "GameScene.h"
 
 using namespace Windows::ApplicationModel;
 using namespace Windows::ApplicationModel::Core;
@@ -37,14 +39,14 @@ void Snake::Initialize(CoreApplicationView^ applicationView)
 
 void Snake::SetWindow(CoreWindow^ window)
 {
-    // Specify the orientation of your application here
-    // The choices are DisplayOrientations::Portrait or DisplayOrientations::Landscape or DisplayOrientations::LandscapeFlipped
+	// Specify the orientation of your application here
+	// The choices are DisplayOrientations::Portrait or DisplayOrientations::Landscape or DisplayOrientations::LandscapeFlipped
 	DisplayProperties::AutoRotationPreferences = DisplayOrientations::Landscape;
 
 	window->VisibilityChanged +=
 		ref new TypedEventHandler<CoreWindow^, VisibilityChangedEventArgs^>(this, &Snake::OnVisibilityChanged);
 
-	window->Closed += 
+	window->Closed +=
 		ref new TypedEventHandler<CoreWindow^, CoreWindowEventArgs^>(this, &Snake::OnWindowClosed);
 
 	window->PointerPressed +=
@@ -56,9 +58,9 @@ void Snake::SetWindow(CoreWindow^ window)
 	window->PointerReleased +=
 		ref new TypedEventHandler<CoreWindow^, PointerEventArgs^>(this, &Snake::OnPointerReleased);
 
-    CCEGLView* eglView = new CCEGLView();
+	CCEGLView* eglView = new CCEGLView();
 	eglView->Create(window);
-    eglView->setViewName("Snake");
+	eglView->setViewName("Snake");
 }
 
 void Snake::Load(Platform::String^ entryPoint)
@@ -67,7 +69,7 @@ void Snake::Load(Platform::String^ entryPoint)
 
 void Snake::Run()
 {
-    CCApplication::sharedApplication()->run();
+	CCApplication::sharedApplication()->run();
 }
 
 void Snake::Uninitialize()
@@ -101,16 +103,36 @@ void Snake::OnPointerReleased(CoreWindow^ sender, PointerEventArgs^ args)
 
 void Snake::OnActivated(CoreApplicationView^ applicationView, IActivatedEventArgs^ args)
 {
-	HardwareButtons::BackPressed += ref new EventHandler<BackPressedEventArgs^>(this, &Snake::OnBackButtonPressed);   
+	HardwareButtons::BackPressed += ref new EventHandler<BackPressedEventArgs^>(this, &Snake::OnBackButtonPressed);
 	CoreWindow::GetForCurrentThread()->Activate();
 }
 
 void Snake::OnBackButtonPressed(Object^ sender, BackPressedEventArgs^ args)
 {
-    // Leave args->Handled set to false and the app will quit when user presses the back button on the phone
-    // uncomment next lines to respond with keyBackClicked() in layers, remember to add init layer use setKeypadEnabled(true)
-    // CCDirector::sharedDirector()->getKeypadDispatcher()->dispatchKeypadMSG( ccKeypadMSGType::kTypeBackClicked );
-    // args->Handled = true;
+	// Leave args->Handled set to false and the app will quit when user presses the back button on the phone
+	// uncomment next lines to respond with keyBackClicked() in layers, remember to add init layer use setKeypadEnabled(true)
+	// CCDirector::sharedDirector()->getKeypadDispatcher()->dispatchKeypadMSG( ccKeypadMSGType::kTypeBackClicked );
+	// args->Handled = true;
+
+	CCScene* runningScene = CCDirector::sharedDirector()->getRunningScene();
+	int tag = runningScene->getTag();
+
+	CCLOG("Back Press");
+
+	switch (tag)
+	{
+	case STARTSCENE_TAG:
+	{
+		args->Handled = false;
+	}
+		break;
+	case GAMESCENE_TAG:
+	{
+		args->Handled = true;
+		CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(1, StartScene::scene()));
+	}
+		break;
+	}
 }
 
 void Snake::OnSuspending(Platform::Object^ sender, SuspendingEventArgs^ args)
@@ -129,7 +151,7 @@ void Snake::OnSuspending(Platform::Object^ sender, SuspendingEventArgs^ args)
 		deferral->Complete();
 	});
 }
- 
+
 void Snake::OnResuming(Platform::Object^ sender, Platform::Object^ args)
 {
 	// Restore any data or state that was unloaded on suspend. By default, data

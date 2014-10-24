@@ -1,5 +1,6 @@
 #include "StartScene.h"
 #include "GameScene.h"
+#include "AppConfig.h"
 
 bool StartScene::init()
 {
@@ -11,13 +12,25 @@ bool StartScene::init()
 
 		CCSize size = CCDirector::sharedDirector()->getWinSize();
 
-		CCMenuItemLabel* lable_menu = CCMenuItemLabel::create(CCLabelTTF::create("Start", "Consolas", 30), this, menu_selector(StartScene::menuStartCallback));
-		lable_menu->setPosition(ccp(size.width / 2, size.height * 0.7));
+		CCLabelTTF* title_label = CCLabelTTF::create("Snake", "fonts/aa.ttf", 60);
+		title_label->setColor(LABEL_COLOR);
+		title_label->setPosition(ccp(size.width / 2, size.height * 0.7));
+		addChild(title_label);
+		
 
-		CCMenu* menu = CCMenu::create(lable_menu, NULL);
+		CCLabelTTF* start_label = CCLabelTTF::create("Tap to start", "fonts/aa.ttf", 45);
+		start_label->setColor(LABEL_COLOR);
+
+		CCBlink* blink = CCBlink::create(2, 1);
+		CCActionInterval* action = CCSequence::create(blink, NULL);
+		start_label->runAction(CCRepeatForever::create(action));
+
+		CCMenuItemLabel* start_menu = CCMenuItemLabel::create(start_label, this, menu_selector(StartScene::menuStartCallback));
+		start_menu->setPosition(ccp(size.width / 2, size.height * 0.4));
+
+		CCMenu* menu = CCMenu::create(start_menu, NULL);
 		menu->setPosition(CCPointZero);
 		addChild(menu);
-
 		bRet = true;
 	} while (0);
 
@@ -28,6 +41,7 @@ CCScene* StartScene::scene()
 {
 	CCScene* s = CCScene::create();
 	s->addChild(StartScene::create());
+	s->setTag(STARTSCENE_TAG);
 	return s;
 }
 
