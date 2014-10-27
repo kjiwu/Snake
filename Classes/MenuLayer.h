@@ -12,11 +12,16 @@ public:
 
 
 	void addScore(int value);
+	void showGameOverMenu();
 private:
 	CCLabelTTF* m_labelValue;
 	int m_score;
 
 	void initScoreMenu();
+	void initGameOverMenu();
+
+	void hideGameOverMenu();
+	void gameRestartCallback(CCObject* pSender);
 };
 
 

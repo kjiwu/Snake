@@ -20,6 +20,9 @@ bool GameScene::init()
 		m_menuLayer = MenuLayer::create();
 		addChild(m_menuLayer, MENULAYER_TAG, MENULAYER_TAG);
 
+		m_beanLayer = BeanLayer::create();
+		addChild(m_beanLayer, BEANLAYER_TAG, BEANLAYER_TAG);
+
 		bRet = true;
 	} while (0);
 

@@ -62,6 +62,9 @@
     <ClCompile Include="..\Classes\MenuLayer.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\BeanLayer.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Snake.h" />
@@ -97,6 +100,9 @@
       <Filter>Classes</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\AppConfig.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BeanLayer.h">
       <Filter>Classes</Filter>
     </ClInclude>
   </ItemGroup>

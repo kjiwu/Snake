@@ -206,6 +206,7 @@
     <ClInclude Include="..\Classes\AppConfig.h" />
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\AppMacros.h" />
+    <ClInclude Include="..\Classes\BeanLayer.h" />
     <ClInclude Include="..\Classes\GameScene.h" />
     <ClInclude Include="..\Classes\MenuLayer.h" />
     <ClInclude Include="..\Classes\Mouse.h" />
@@ -218,6 +219,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
+    <ClCompile Include="..\Classes\BeanLayer.cpp" />
     <ClCompile Include="..\Classes\GameScene.cpp" />
     <ClCompile Include="..\Classes\MenuLayer.cpp" />
     <ClCompile Include="..\Classes\Mouse.cpp" />

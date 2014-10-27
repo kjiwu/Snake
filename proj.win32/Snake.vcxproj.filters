@@ -36,6 +36,9 @@
     <ClCompile Include="..\Classes\SnakeBody.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\BeanLayer.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -51,9 +54,6 @@
       <Filter>Classes</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\StartScene.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Animal.h">
       <Filter>Classes</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Mouse.h">
@@ -72,6 +72,9 @@
       <Filter>Classes</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\SnakeBody.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BeanLayer.h">
       <Filter>Classes</Filter>
     </ClInclude>
   </ItemGroup>
