@@ -36,6 +36,7 @@ private:
 	void updateBodyPosition(SnakeBody* body, const CCPoint position);
 	void died();
 	void eat();
+	CCPoint getEatBeanPosition();
 };
 
 
