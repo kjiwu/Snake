@@ -130,8 +130,8 @@ void PlayerLayer::died()
 {
 	SnakeBody* header = dynamic_cast<SnakeBody*>(m_bodies->objectAtIndex(0));
 	CCPoint mapPos = header->getMapPosition();
-	if ((1 == mapPos.x || mapPos.x == m_map->getMapSize().width) ||
-		(1 == mapPos.y || mapPos.y == m_map->getMapSize().height))
+	if ((1 == mapPos.x || mapPos.x == m_map->getMapSize().height) ||
+		(1 == mapPos.y || mapPos.y == m_map->getMapSize().width))
 	{
 		MenuLayer* menuLayer = dynamic_cast<MenuLayer*>(getParent()->getChildByTag(MENULAYER_TAG));
 		menuLayer->showGameOverMenu();
